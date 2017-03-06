@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VueJS v2</title>
+	<!--- Vue JS  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.min.js"></script>
+	<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+	<!--- Bootstrap V4  -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"d></script>
+</head>
+<body>
+
+	<div id="test">
+	<table class="table table-bordered table-striped table-responsive" >
+		<thead>
+		    <tr>
+		      <th>Id</th>
+		      <th>First Name</th>
+		      <th>Last Name</th>
+		      <th>Hobby</th>
+		      <th>Details</th>
+		    </tr>
+	  	</thead>
+	    <tr v-for="data in data1">
+	      <td>{{data.id}}</td>
+	      <td>{{data.first_name}}</td>
+	      <td>{{data.last_name}}</td>
+	      <td>{{data.hobby}}</td>
+	      <td><button type="button" class="btn btn-outline-primary btn-sm">Primary</button></td>
+	    </tr>
+	    </table>
+	</div>
+
+	<script>
+	
+	new Vue({
+	  	el: '#test',
+	    mounted() {
+	        this.getMessage()
+	        console.log('mounted: got here') // Get the message when the component mounts
+	    },
+	    data() {
+	        return {
+	            data1:[],
+	        }
+	    },
+	    methods: {
+	        getMessage() {
+	            axios.get('angular.json')
+	            .then(response => {
+	                this.data1 = response.data
+	                console.log(JSON.stringify(response.data))
+	            })
+	            .catch(function (error) {
+    			console.log(error)
+    			})
+	        }
+	    }
+	})	
+
+	</script>
+
+</body>
+</html>
